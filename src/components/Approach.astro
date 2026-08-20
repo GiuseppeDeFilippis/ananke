@@ -1,0 +1,232 @@
+---
+const isEnglish = Astro.currentLocale === "en";
+
+const content = isEnglish
+  ? {
+      label: "Approach",
+      title: "I don't start with technology.",
+      titleAccent: "I start with the problem.",
+      description: [
+        "Every project starts with a need, not with a predefined solution. I take the time to understand what needs to be solved, then I choose the right tools to build something that actually works.",
+        "No unnecessary complexity. No technology for the sake of technology. Just thoughtful digital solutions shaped around the people, processes and goals behind each project.",
+      ],
+      principles: [
+        {
+          number: "01",
+          title: "Understand",
+          description:
+            "I start by understanding the problem, the context and the people who will use the product.",
+        },
+        {
+          number: "02",
+          title: "Design",
+          description:
+            "I turn requirements into clear, simple and purposeful digital experiences.",
+        },
+        {
+          number: "03",
+          title: "Build",
+          description:
+            "I develop reliable solutions using the technologies that best fit the project.",
+        },
+      ],
+    }
+  : {
+      label: "Approccio",
+      title: "Non parto dalla tecnologia.",
+      titleAccent: "Parto dal problema.",
+      description: [
+        "Ogni progetto nasce da una necessità, non da una soluzione predefinita. Prima cerco di capire cosa deve essere risolto, poi scelgo gli strumenti più adatti per costruire qualcosa che funzioni davvero.",
+        "Niente complessità inutile. Niente tecnologia fine a se stessa. Solo soluzioni digitali progettate intorno alle persone, ai processi e agli obiettivi che ci sono dietro ogni progetto.",
+      ],
+      principles: [
+        {
+          number: "01",
+          title: "Capire",
+          description:
+            "Parto dal problema, dal contesto e dalle persone che utilizzeranno il prodotto.",
+        },
+        {
+          number: "02",
+          title: "Progettare",
+          description:
+            "Trasformo le necessità in esperienze digitali chiare, semplici e funzionali.",
+        },
+        {
+          number: "03",
+          title: "Costruire",
+          description:
+            "Sviluppo soluzioni affidabili scegliendo le tecnologie più adatte al progetto.",
+        },
+      ],
+    };
+---
+
+<section class="approach">
+  <div class="approach-inner">
+    <div class="section-label">
+      <span>/ 04</span>
+      <span>{content.label}</span>
+    </div>
+
+    <div class="approach-content">
+      <h2>
+        {content.title}
+        <br />
+        <span>{content.titleAccent}</span>
+      </h2>
+
+      <div class="approach-description">
+        {content.description.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+
+    <div class="approach-principles">
+      {
+        content.principles.map((principle) => (
+          <div class="principle">
+            <span class="principle-number">{principle.number}</span>
+
+            <h3>{principle.title}</h3>
+
+            <p>{principle.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .approach {
+    padding: 180px $container-padding;
+    border-top: 1px solid $color-border;
+  }
+
+  .approach-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .approach-content {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 100px;
+
+    margin-top: 100px;
+  }
+
+  h2 {
+    max-width: 900px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  h2 span {
+    color: $color-accent;
+  }
+
+  .approach-description {
+    align-self: end;
+    max-width: 420px;
+  }
+
+  .approach-description p {
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .approach-description p + p {
+    margin-top: 24px;
+  }
+
+  .approach-principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+
+    margin-top: 140px;
+    padding-top: 32px;
+
+    border-top: 1px solid $color-border;
+  }
+
+  .principle {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    column-gap: 24px;
+  }
+
+  .principle-number {
+    grid-row: span 2;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    color: $color-muted;
+  }
+
+  .principle h3 {
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .principle p {
+    margin: 16px 0 0;
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: $color-muted;
+  }
+
+  @media (max-width: 900px) {
+    .approach {
+      padding: 120px $container-padding;
+    }
+
+    .approach-content {
+      grid-template-columns: 1fr;
+      gap: 48px;
+
+      margin-top: 80px;
+    }
+
+    h2 {
+      font-size: clamp(3rem, 12vw, 5rem);
+    }
+
+    .approach-principles {
+      grid-template-columns: 1fr;
+      gap: 48px;
+
+      margin-top: 100px;
+    }
+  }
+</style>

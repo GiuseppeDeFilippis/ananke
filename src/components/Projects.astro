@@ -1,0 +1,250 @@
+---
+import quandononcisonoCover from "../assets/projects/quandononcisono/cover.jpeg";
+import studioLeoneCover from "../assets/projects/studio-leone/cover.jpeg";
+const isEnglish = Astro.currentLocale === "en";
+
+const projects = isEnglish
+  ? [
+      {
+        number: "01",
+        name: "quandononcisono",
+        category: "Editorial web application",
+        description:
+          "A custom digital publishing platform built from scratch, combining editorial content, podcasting and newsletter management in a single system.",
+        image: quandononcisonoCover,
+      },
+      {
+        number: "02",
+        name: "Studio Leone",
+        category: "Professional website",
+        description:
+          "A refined digital presence designed and developed for a psychology practice.",
+        image: studioLeoneCover,
+      },
+    ]
+  : [
+      {
+        number: "01",
+        name: "quandononcisono",
+        category: "Web application editoriale",
+        description:
+          "Una piattaforma editoriale digitale sviluppata da zero, che integra contenuti, podcast e gestione della newsletter in un unico sistema.",
+        image: quandononcisonoCover,
+      },
+      {
+        number: "02",
+        name: "Studio Leone",
+        category: "Sito web professionale",
+        description:
+          "Una presenza digitale essenziale e curata, progettata e sviluppata per uno studio di psicologia.",
+        image: studioLeoneCover,
+      },
+    ];
+---
+
+<section class="projects">
+  <div class="projects-inner">
+    <div class="section-label">
+      <span>/ 04</span>
+      <span>{isEnglish ? "Selected projects" : "Progetti selezionati"}</span>
+    </div>
+
+    <div class="projects-list">
+      {
+        projects.map((project) => (
+          <article class="project">
+            <div class="project-header">
+              <span class="project-number">{project.number}</span>
+
+              <div class="project-meta">
+                <span class="project-name">{project.name}</span>
+                <span class="project-category">{project.category}</span>
+              </div>
+
+              <span class="project-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </div>
+
+            <div class="project-visual">
+              {project.image ? (
+                <img
+                  src={project.image.src}
+                  alt={
+                    isEnglish
+                      ? `${project.name} project preview`
+                      : `Anteprima del progetto ${project.name}`
+                  }
+                />
+              ) : (
+                <div class="project-placeholder">
+                  <span>
+                    {isEnglish ? "Project preview" : "Anteprima progetto"}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <p class="project-description">{project.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .projects {
+    padding: 180px $container-padding;
+    border-top: 1px solid $color-border;
+  }
+
+  .projects-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .projects-list {
+    margin-top: 100px;
+  }
+
+  .project {
+    padding: 0 0 120px;
+  }
+
+  .project + .project {
+    padding-top: 120px;
+    border-top: 1px solid $color-border;
+  }
+
+  .project-header {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: start;
+    gap: 40px;
+  }
+
+  .project-number,
+  .project-category {
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .project-name {
+    font-family: $font-display;
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .project-arrow {
+    font-family: $font-mono;
+    font-size: 1.2rem;
+    color: $color-accent;
+
+    transition: transform $transition-fast;
+  }
+
+  .project:hover .project-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .project-visual {
+    margin-top: 48px;
+    overflow: hidden;
+  }
+
+  .project-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .project-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    aspect-ratio: 16 / 9;
+
+    background: $color-surface;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .project-description {
+    max-width: 560px;
+    margin: 28px 0 0;
+    margin-left: 120px;
+
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: $color-muted;
+  }
+
+  @media (max-width: 900px) {
+    .projects {
+      padding: 120px $container-padding;
+    }
+
+    .projects-list {
+      margin-top: 80px;
+    }
+
+    .project {
+      padding-bottom: 80px;
+    }
+
+    .project + .project {
+      padding-top: 80px;
+    }
+
+    .project-header {
+      grid-template-columns: 48px 1fr auto;
+      gap: 20px;
+    }
+
+    .project-name {
+      font-size: clamp(2.8rem, 12vw, 5rem);
+    }
+
+    .project-visual {
+      margin-top: 36px;
+    }
+
+    .project-description {
+      margin-left: 68px;
+    }
+  }
+</style>

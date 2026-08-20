@@ -1,0 +1,171 @@
+---
+const isEnglish = Astro.currentLocale === "en";
+---
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">
+      <span>/ 01</span>
+      <span>Independent Software Studio</span>
+    </div>
+
+    <div class="hero-content">
+      <h1>
+        {
+          isEnglish ? (
+            <>
+              Think.
+              <br />
+              Design.
+              <br />
+              Build.
+            </>
+          ) : (
+            <>
+              Pensare.
+              <br />
+              Progettare.
+              <br />
+              Costruire.
+            </>
+          )
+        }
+      </h1>
+
+      <div class="hero-footer">
+        <p>
+          {
+            isEnglish
+              ? "Websites, web applications and custom software."
+              : "Siti web, applicazioni web e software su misura."
+          }
+        </p>
+
+        <span class="hero-author"> by Giuseppe De Filippis </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span>{isEnglish ? "Scroll to explore" : "Scorri per esplorare"}</span>
+    <span>↓</span>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 90px);
+    padding: 80px $container-padding 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .hero-content {
+    margin-top: clamp(100px, 18vh, 180px);
+  }
+
+  .hero h1 {
+    max-width: 900px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.8rem, 6.5vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: $color-text;
+  }
+
+  .hero-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 48px;
+    max-width: 760px;
+  }
+
+  .hero-footer p {
+    max-width: 440px;
+    margin: 0;
+
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $color-muted;
+  }
+
+  .hero-author {
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .hero-scroll {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+
+    font-family: $font-mono;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .hero-scroll span:last-child {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      min-height: calc(100vh - 80px);
+      padding-top: 60px;
+      padding-bottom: 32px;
+    }
+
+    .hero-content {
+      margin-top: 100px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 13vw, 5rem);
+    }
+
+    .hero-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 40px;
+      gap: 20px;
+    }
+  }
+</style>

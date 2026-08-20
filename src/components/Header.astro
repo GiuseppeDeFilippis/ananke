@@ -1,0 +1,213 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const currentLocale = Astro.currentLocale ?? "it";
+const isEnglish = currentLocale === "en";
+
+const alternateLocale = isEnglish ? "it" : "en";
+const alternateUrl = getRelativeLocaleUrl(alternateLocale);
+---
+
+<header class="site-header">
+  <div class="header-container">
+    <a
+      href={getRelativeLocaleUrl(currentLocale)}
+      class="brand"
+      aria-label="ANANKE — Home"
+    >
+      <span class="brand-name">ANANKE</span>
+      <span class="brand-subtitle">Independent Software Studio</span>
+    </a>
+
+    <nav
+      class="main-nav"
+      aria-label={isEnglish ? "Main navigation" : "Navigazione principale"}
+    >
+      {
+        isEnglish ? (
+          <>
+            <a href="/en/services">Services</a>
+            <a href="/en/work">Work</a>
+            <a href="/en/process">Process</a>
+            <a href="/en/about">About</a>
+          </>
+        ) : (
+          <>
+            <a href="/servizi">Servizi</a>
+            <a href="/progetti">Progetti</a>
+            <a href="/processo">Processo</a>
+            <a href="/chi-sono">Chi sono</a>
+          </>
+        )
+      }
+    </nav>
+
+    <div class="header-actions">
+      <a href={isEnglish ? "/en/contact" : "/contatti"} class="contact-link">
+        <span>{isEnglish ? "Contact" : "Contatti"}</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <div class="language-switcher" aria-label="Language">
+        {
+          isEnglish ? (
+            <>
+              <a href={alternateUrl}>IT</a>
+              <span aria-hidden="true">/</span>
+              <span class="active">EN</span>
+            </>
+          ) : (
+            <>
+              <span class="active">IT</span>
+              <span aria-hidden="true">/</span>
+              <a href={alternateUrl}>EN</a>
+            </>
+          )
+        }
+      </div>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label={isEnglish ? "Open menu" : "Apri menu"}
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .site-header {
+    width: 100%;
+    padding: 24px $container-padding;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-family: $font-display;
+    font-size: 1.6rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .brand-subtitle {
+    font-family: $font-mono;
+    font-size: 0.55rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-left: auto;
+  }
+
+  .main-nav a,
+  .contact-link,
+  .language-switcher {
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .main-nav a {
+    color: $color-muted;
+    transition: color $transition-fast;
+  }
+
+  .main-nav a:hover {
+    color: $color-text;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .language-switcher a {
+    color: $color-muted;
+    transition: color $transition-fast;
+  }
+
+  .language-switcher a:hover {
+    color: $color-text;
+  }
+
+  .language-switcher .active {
+    color: $color-text;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $color-accent;
+  }
+
+  .contact-link span:last-child {
+    font-size: 1rem;
+    transition: transform $transition-fast;
+  }
+
+  .contact-link:hover span:last-child {
+    transform: translate(2px, -2px);
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: $color-text;
+  }
+
+  @media (max-width: 900px) {
+    .main-nav,
+    .language-switcher,
+    .contact-link {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+const isEnglish = Astro.currentLocale === "en";
+---
+
+<section class="intro">
+  <div class="intro-inner">
+    <div class="section-label">
+      <span>/ 02</span>
+      <span>{isEnglish ? "What we do" : "Cosa facciamo"}</span>
+    </div>
+
+    <div class="intro-content">
+      <p class="intro-statement">
+        {
+          isEnglish ? (
+            <>
+              ANANKE is an independent software studio.
+              <br />I design and build digital products that are
+              <span>simple, solid and useful.</span>
+            </>
+          ) : (
+            <>
+              ANANKE è uno studio software indipendente.
+              <br />
+              Progetto e sviluppo prodotti digitali pensati per essere
+              <span>semplici, solidi e utili.</span>
+            </>
+          )
+        }
+      </p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .intro {
+    padding: 180px $container-padding;
+    border-top: 1px solid $color-border;
+  }
+
+  .intro-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .intro-content {
+    max-width: 1050px;
+    margin-top: 110px;
+    margin-left: auto;
+  }
+
+  .intro-statement {
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(2.8rem, 5vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: $color-text;
+  }
+
+  .intro-statement span {
+    color: $color-muted;
+    margin-left: 0.2em;
+  }
+
+  @media (max-width: 900px) {
+    .intro {
+      padding: 120px $container-padding;
+    }
+
+    .intro-content {
+      margin-top: 80px;
+    }
+
+    .intro-statement {
+      font-size: clamp(2.4rem, 9vw, 4rem);
+    }
+  }
+</style>

@@ -1,0 +1,150 @@
+---
+const isEnglish = Astro.currentLocale === "en";
+
+const content = isEnglish
+  ? {
+      label: "Let's work together",
+      title: "Have a project in mind?",
+      description:
+        "Tell me what you need. We'll figure out the right way to build it.",
+      button: "Start a conversation",
+    }
+  : {
+      label: "Lavoriamo insieme",
+      title: "Hai un progetto in mente?",
+      description:
+        "Raccontami di cosa hai bisogno. Troveremo insieme il modo giusto per costruirlo.",
+      button: "Parliamone",
+    };
+---
+
+<section class="cta">
+  <div class="cta-inner">
+    <div class="section-label">
+      <span>/ 05</span>
+      <span>{content.label}</span>
+    </div>
+
+    <div class="cta-content">
+      <h2>{content.title}</h2>
+
+      <div class="cta-bottom">
+        <p>{content.description}</p>
+
+        <a href="/contatti" class="cta-link">
+          <span>{content.button}</span>
+          <span class="cta-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .cta {
+    padding: 180px $container-padding;
+    border-top: 1px solid $color-border;
+  }
+
+  .cta-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .cta-content {
+    margin-top: 100px;
+  }
+
+  h2 {
+    max-width: 900px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(2.8rem, 5vw, 5.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .cta-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 60px;
+
+    margin-top: 80px;
+    padding-left: 120px;
+  }
+
+  .cta-bottom p {
+    max-width: 420px;
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: $color-accent;
+  }
+
+  .cta-arrow {
+    font-size: 1.1rem;
+    transition: transform $transition-fast;
+  }
+
+  .cta-link:hover .cta-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 900px) {
+    .cta {
+      padding: 120px $container-padding;
+    }
+
+    .cta-content {
+      margin-top: 80px;
+    }
+
+    h2 {
+      font-size: clamp(2.8rem, 12vw, 5rem);
+    }
+
+    .cta-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+
+      margin-top: 60px;
+      padding-left: 0;
+    }
+  }
+</style>
