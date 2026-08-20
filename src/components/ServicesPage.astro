@@ -1,0 +1,450 @@
+---
+const isEnglish = Astro.currentLocale === "en";
+
+const content = isEnglish
+  ? {
+      title: "Digital solutions built around real needs.",
+      intro:
+        "From websites to custom software, I design and develop digital solutions around the people, processes and goals behind each project. The technology comes after understanding what needs to be solved.",
+      services: [
+        {
+          number: "01",
+          id: "websites",
+          title: "Websites",
+          description:
+            "A website should do more than exist online. It should communicate clearly, feel intentional and make it easy for the right people to understand who you are and what you offer.",
+          details:
+            "I design and develop fast, responsive and carefully structured websites, with particular attention to content, usability, performance and search engine visibility. The result is a digital presence that reflects the identity of a person, professional or business without unnecessary complexity.",
+          audience:
+            "For professionals, small businesses, studios, independent projects and anyone who needs a clear and credible presence on the web.",
+        },
+        {
+          number: "02",
+          id: "web-applications",
+          title: "Web applications",
+          description:
+            "When a website is not enough, a web application can turn a recurring need or a complex workflow into a tool that people can actually use every day.",
+          details:
+            "I build custom web applications that bring interfaces, data and business logic together in one accessible environment. From internal tools and dashboards to more structured digital products, every application is designed around the specific workflow it needs to support.",
+          audience:
+            "For teams, businesses and projects that need a digital tool rather than a simple informational website.",
+        },
+        {
+          number: "03",
+          id: "custom-software",
+          title: "Custom software",
+          description:
+            "Some problems do not fit inside an existing product. In those cases, building the right software from the ground up can be the simplest and most effective solution.",
+          details:
+            "I analyse the process, define the requirements and develop software tailored to the way an organisation actually works. The focus is not on adding technology, but on creating something useful, maintainable and aligned with the real needs of the project.",
+          audience:
+            "For businesses and organisations with specific processes, requirements or operational needs that cannot be adequately addressed by off-the-shelf software.",
+        },
+        {
+          number: "04",
+          id: "automation",
+          title: "Automation",
+          description:
+            "Repetitive work often hides valuable time. Automation can turn recurring manual operations into reliable processes that run with less intervention.",
+          details:
+            "I identify repetitive or error-prone parts of a workflow and develop tailored automations to simplify them. Integrations, data processing, scheduled operations and connections between existing systems can become part of a single, more efficient process.",
+          audience:
+            "For professionals and businesses that spend time repeating the same digital operations and want to make their workflows simpler and more reliable.",
+        },
+      ],
+      ctaTitle: "Not sure what you need?",
+      ctaDescription:
+        "Tell me about the problem you are trying to solve. We can start there and figure out what kind of solution makes sense.",
+      ctaButton: "Let's talk",
+    }
+  : {
+      title: "Soluzioni digitali costruite intorno a esigenze reali.",
+      intro:
+        "Dai siti web al software su misura, progetto e sviluppo soluzioni digitali intorno alle persone, ai processi e agli obiettivi che ci sono dietro ogni progetto. La tecnologia viene dopo aver capito cosa deve essere risolto.",
+      services: [
+        {
+          number: "01",
+          id: "siti-web",
+          title: "Siti web",
+          description:
+            "Un sito web non dovrebbe limitarsi a esistere online. Deve comunicare con chiarezza, avere una direzione precisa e permettere alle persone giuste di capire chi sei e cosa fai.",
+          details:
+            "Progetto e sviluppo siti web veloci, responsive e curati nella struttura, con particolare attenzione a contenuti, usabilità, performance e visibilità sui motori di ricerca. Il risultato è una presenza digitale che riflette l'identità di una persona, di un professionista o di un'attività senza aggiungere complessità inutile.",
+          audience:
+            "Per professionisti, piccole attività, studi, progetti indipendenti e chiunque abbia bisogno di una presenza online chiara e credibile.",
+        },
+        {
+          number: "02",
+          id: "applicazioni-web",
+          title: "Applicazioni web",
+          description:
+            "Quando un sito non è sufficiente, un'applicazione web può trasformare una necessità ricorrente o un processo complesso in uno strumento che le persone possono utilizzare ogni giorno.",
+          details:
+            "Sviluppo applicazioni web personalizzate che uniscono interfaccia, dati e logica applicativa in un unico ambiente accessibile. Da strumenti interni e dashboard a prodotti digitali più strutturati, ogni applicazione viene progettata intorno al processo che deve supportare.",
+          audience:
+            "Per team, aziende e progetti che hanno bisogno di uno strumento digitale e non di un semplice sito informativo.",
+        },
+        {
+          number: "03",
+          id: "software-su-misura",
+          title: "Software su misura",
+          description:
+            "Alcuni problemi non possono essere risolti efficacemente con un prodotto già esistente. In questi casi, costruire il software da zero può essere la soluzione più semplice ed efficace.",
+          details:
+            "Analizzo il processo, definisco i requisiti e sviluppo software costruito intorno al modo in cui un'organizzazione lavora realmente. L'obiettivo non è aggiungere tecnologia, ma creare qualcosa di utile, mantenibile e coerente con le esigenze concrete del progetto.",
+          audience:
+            "Per aziende e organizzazioni con processi, requisiti o necessità operative specifiche che non possono essere gestiti adeguatamente con software già disponibili.",
+        },
+        {
+          number: "04",
+          id: "automazione",
+          title: "Automazione",
+          description:
+            "Il lavoro ripetitivo spesso nasconde tempo prezioso. L'automazione può trasformare operazioni manuali ricorrenti in processi affidabili che richiedono meno intervento.",
+          details:
+            "Individuo le parti ripetitive o soggette a errore di un processo e sviluppo automazioni personalizzate per semplificarle. Integrazioni, elaborazione dei dati, operazioni programmate e collegamenti tra sistemi esistenti possono diventare parte di un unico flusso più efficiente.",
+          audience:
+            "Per professionisti e aziende che dedicano tempo a ripetere le stesse operazioni digitali e vogliono rendere i propri processi più semplici e affidabili.",
+        },
+      ],
+      ctaTitle: "Non sai ancora di cosa hai bisogno?",
+      ctaDescription:
+        "Raccontami il problema che stai cercando di risolvere. Possiamo partire da quello e capire insieme quale tipo di soluzione ha senso.",
+      ctaButton: "Parliamone",
+    };
+---
+
+<section class="services-hero">
+  <div class="services-hero-inner">
+    <div class="section-label">
+      <span>/ 01</span>
+      <span>{isEnglish ? "Services" : "Servizi"}</span>
+    </div>
+
+    <h1>{content.title}</h1>
+
+    <p class="services-intro">{content.intro}</p>
+  </div>
+</section>
+
+<section class="services-list" aria-label={isEnglish ? "Services" : "Servizi"}>
+  <div class="services-list-inner">
+    {
+      content.services.map((service) => (
+        <article class="service" id={service.id}>
+          <div class="service-header">
+            <span class="service-number">{service.number}</span>
+
+            <h2>{service.title}</h2>
+          </div>
+
+          <div class="service-content">
+            <div class="service-main">
+              <p class="service-description">{service.description}</p>
+
+              <p class="service-details">{service.details}</p>
+            </div>
+
+            <div class="service-audience">
+              <span class="service-label">
+                {isEnglish ? "Who it's for" : "A chi è rivolto"}
+              </span>
+
+              <p>{service.audience}</p>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="services-cta">
+  <div class="services-cta-inner">
+    <div class="section-label">
+      <span>/ 02</span>
+      <span>{isEnglish ? "Start a project" : "Iniziamo un progetto"}</span>
+    </div>
+
+    <div class="services-cta-content">
+      <h2>{content.ctaTitle}</h2>
+
+      <div class="services-cta-bottom">
+        <p>{content.ctaDescription}</p>
+
+        <a href={isEnglish ? "/en/contatti" : "/contatti"}>
+          <span>{content.ctaButton}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .services-hero,
+  .services-list,
+  .services-cta {
+    padding: 180px $container-padding;
+    border-top: 1px solid $color-border;
+  }
+
+  .services-hero-inner,
+  .services-list-inner,
+  .services-cta-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  h1 {
+    max-width: 1000px;
+    margin: 100px 0 0;
+
+    font-family: $font-display;
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+
+  .services-intro {
+    max-width: 620px;
+    margin: 60px 0 0 120px;
+
+    font-size: 1rem;
+    line-height: 1.75;
+    color: $color-muted;
+  }
+
+  .services-list {
+    padding-top: 0;
+  }
+
+  .service {
+    scroll-margin-top: 40px;
+    padding: 100px 0;
+    border-top: 1px solid $color-border;
+  }
+
+  .service:last-child {
+    border-bottom: 1px solid $color-border;
+  }
+
+  .service-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 40px;
+  }
+
+  .service-number {
+    padding-top: 12px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: $color-muted;
+  }
+
+  .service-header h2 {
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .service-content {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 100px;
+
+    margin-top: 60px;
+    padding-left: 120px;
+  }
+
+  .service-main {
+    max-width: 680px;
+  }
+
+  .service-description {
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .service-details {
+    margin: 32px 0 0;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .service-audience {
+    align-self: end;
+    max-width: 360px;
+  }
+
+  .service-label {
+    display: block;
+
+    margin-bottom: 16px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .service-audience p {
+    margin: 0;
+
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .services-cta-content {
+    margin-top: 100px;
+  }
+
+  .services-cta-content h2 {
+    max-width: 900px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .services-cta-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 60px;
+
+    margin-top: 70px;
+    padding-left: 120px;
+  }
+
+  .services-cta-bottom p {
+    max-width: 460px;
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .services-cta-bottom a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: $color-accent;
+  }
+
+  .services-cta-bottom a span:last-child {
+    font-size: 1.1rem;
+    transition: transform $transition-fast;
+  }
+
+  .services-cta-bottom a:hover span:last-child {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 900px) {
+    .services-hero,
+    .services-list,
+    .services-cta {
+      padding: 120px $container-padding;
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: clamp(3.5rem, 13vw, 6rem);
+    }
+
+    .services-intro {
+      margin: 48px 0 0;
+    }
+
+    .service {
+      padding: 80px 0;
+    }
+
+    .service-header {
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+    }
+
+    .service-header h2 {
+      font-size: clamp(3rem, 11vw, 5rem);
+    }
+
+    .service-content {
+      grid-template-columns: 1fr;
+      gap: 48px;
+
+      margin-top: 48px;
+      padding-left: 68px;
+    }
+
+    .service-description {
+      font-size: 1.3rem;
+    }
+
+    .services-cta-content {
+      margin-top: 80px;
+    }
+
+    .services-cta-content h2 {
+      font-size: clamp(3rem, 12vw, 5rem);
+    }
+
+    .services-cta-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+
+      margin-top: 60px;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .service-content {
+      padding-left: 0;
+    }
+  }
+</style>

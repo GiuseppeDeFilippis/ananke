@@ -1,0 +1,557 @@
+---
+const isEnglish = Astro.currentLocale === "en";
+
+const content = isEnglish
+  ? {
+      label: "Process",
+      title: "A clear process makes better products.",
+      intro:
+        "Good digital work does not begin with code. It begins with understanding what needs to be built, why it matters and what the simplest effective solution looks like.",
+      phases: [
+        {
+          number: "01",
+          title: "Understand",
+          subtitle: "The problem comes first.",
+          description:
+            "Before choosing a technology or defining a solution, I try to understand the context. What needs to be solved? Who will use the product? Which constraints, goals and processes matter?",
+          points: [
+            "Goals and requirements",
+            "Users and context",
+            "Existing processes",
+            "Technical constraints",
+          ],
+        },
+        {
+          number: "02",
+          title: "Define",
+          subtitle: "Turn complexity into direction.",
+          description:
+            "Once the problem is clear, I define the structure of the solution. I identify what is essential, what can be simplified and which technologies are actually useful for the project.",
+          points: [
+            "Information architecture",
+            "Features and priorities",
+            "Technical approach",
+            "Project structure",
+          ],
+        },
+        {
+          number: "03",
+          title: "Design",
+          subtitle: "Make the solution understandable.",
+          description:
+            "Design is not only about appearance. It is about creating an interface and an experience that make the product clear, coherent and easy to use.",
+          points: [
+            "Interface and visual language",
+            "User experience",
+            "Responsive behaviour",
+            "Interaction patterns",
+          ],
+        },
+        {
+          number: "04",
+          title: "Build",
+          subtitle: "Turn the idea into something real.",
+          description:
+            "I develop the product using the technologies that best fit the problem. The focus is on clean architecture, reliable behaviour and code that can evolve with the project.",
+          points: [
+            "Frontend development",
+            "Backend and APIs",
+            "Database and integrations",
+            "Testing and refinement",
+          ],
+        },
+        {
+          number: "05",
+          title: "Refine",
+          subtitle: "Good work continues after launch.",
+          description:
+            "Once the product is working, I look at what can be improved. Performance, usability, content, technical details and future needs all become part of the next iteration.",
+          points: [
+            "Testing and feedback",
+            "Performance",
+            "SEO and accessibility",
+            "Future improvements",
+          ],
+        },
+      ],
+      closingTitle: "No unnecessary steps.",
+      closingText:
+        "The process adapts to the project. A simple website does not need the same workflow as a complex web application. What remains constant is the attention to the problem, the people and the result.",
+      ctaTitle: "Let's build something useful.",
+      ctaText:
+        "If you have an idea, a problem to solve or a process that could work better, let's start there.",
+      ctaButton: "Start a conversation",
+    }
+  : {
+      label: "Processo",
+      title: "Un processo chiaro porta a prodotti migliori.",
+      intro:
+        "Un buon lavoro digitale non comincia dal codice. Comincia dalla comprensione di ciò che deve essere costruito, del perché sia importante e di quale sia la soluzione più semplice per farlo funzionare davvero.",
+      phases: [
+        {
+          number: "01",
+          title: "Capire",
+          subtitle: "Prima viene il problema.",
+          description:
+            "Prima di scegliere una tecnologia o definire una soluzione, cerco di capire il contesto. Cosa deve essere risolto? Chi utilizzerà il prodotto? Quali vincoli, obiettivi e processi contano davvero?",
+          points: [
+            "Obiettivi e requisiti",
+            "Persone e contesto",
+            "Processi esistenti",
+            "Vincoli tecnici",
+          ],
+        },
+        {
+          number: "02",
+          title: "Definire",
+          subtitle: "Trasformare la complessità in una direzione.",
+          description:
+            "Quando il problema è chiaro, definisco la struttura della soluzione. Individuo ciò che è essenziale, ciò che può essere semplificato e quali tecnologie sono realmente utili per il progetto.",
+          points: [
+            "Architettura dei contenuti",
+            "Funzionalità e priorità",
+            "Approccio tecnico",
+            "Struttura del progetto",
+          ],
+        },
+        {
+          number: "03",
+          title: "Progettare",
+          subtitle: "Rendere la soluzione comprensibile.",
+          description:
+            "Il design non riguarda soltanto l'aspetto visivo. Significa creare un'interfaccia e un'esperienza capaci di rendere il prodotto chiaro, coerente e semplice da utilizzare.",
+          points: [
+            "Interfaccia e linguaggio visivo",
+            "Esperienza utente",
+            "Comportamento responsive",
+            "Pattern di interazione",
+          ],
+        },
+        {
+          number: "04",
+          title: "Costruire",
+          subtitle: "Trasformare l'idea in qualcosa di reale.",
+          description:
+            "Sviluppo il prodotto utilizzando le tecnologie più adatte al problema. L'attenzione è rivolta a un'architettura pulita, a un comportamento affidabile e a un codice capace di evolvere insieme al progetto.",
+          points: [
+            "Sviluppo frontend",
+            "Backend e API",
+            "Database e integrazioni",
+            "Test e rifinitura",
+          ],
+        },
+        {
+          number: "05",
+          title: "Affinare",
+          subtitle: "Il lavoro continua anche dopo il lancio.",
+          description:
+            "Quando il prodotto funziona, guardo a ciò che può essere migliorato. Performance, usabilità, contenuti, aspetti tecnici e necessità future diventano parte della successiva iterazione.",
+          points: [
+            "Test e feedback",
+            "Performance",
+            "SEO e accessibilità",
+            "Miglioramenti futuri",
+          ],
+        },
+      ],
+      closingTitle: "Nessun passaggio superfluo.",
+      closingText:
+        "Il processo si adatta al progetto. Un sito web semplice non ha bisogno dello stesso percorso di una web application complessa. Ciò che rimane costante è l'attenzione al problema, alle persone e al risultato.",
+      ctaTitle: "Costruiamo qualcosa di utile.",
+      ctaText:
+        "Hai un'idea, un problema da risolvere o un processo che potrebbe funzionare meglio? Partiamo da lì.",
+      ctaButton: "Parliamone",
+    };
+---
+
+<section class="process-hero">
+  <div class="process-hero-inner">
+    <div class="section-label">
+      <span>/ 01</span>
+      <span>{content.label}</span>
+    </div>
+
+    <h1>{content.title}</h1>
+
+    <p class="process-intro">{content.intro}</p>
+  </div>
+</section>
+
+<section
+  class="process-phases"
+  aria-label={isEnglish ? "Development process" : "Processo di sviluppo"}
+>
+  <div class="process-phases-inner">
+    {
+      content.phases.map((phase) => (
+        <article class="phase">
+          <div class="phase-header">
+            <span class="phase-number">{phase.number}</span>
+
+            <div class="phase-title">
+              <span class="phase-subtitle">{phase.subtitle}</span>
+              <h2>{phase.title}</h2>
+            </div>
+          </div>
+
+          <div class="phase-body">
+            <p class="phase-description">{phase.description}</p>
+
+            <ul class="phase-points">
+              {phase.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="process-closing">
+  <div class="process-closing-inner">
+    <div class="section-label">
+      <span>/ 02</span>
+      <span>{isEnglish ? "The principle" : "Il principio"}</span>
+    </div>
+
+    <div class="process-closing-content">
+      <h2>{content.closingTitle}</h2>
+
+      <p>{content.closingText}</p>
+    </div>
+  </div>
+</section>
+
+<section class="process-cta">
+  <div class="process-cta-inner">
+    <div class="section-label">
+      <span>/ 03</span>
+      <span>{isEnglish ? "Start a project" : "Iniziamo un progetto"}</span>
+    </div>
+
+    <div class="process-cta-content">
+      <h2>{content.ctaTitle}</h2>
+
+      <div class="process-cta-bottom">
+        <p>{content.ctaText}</p>
+
+        <a href={isEnglish ? "/en/contact" : "/contatti"}>
+          <span>{content.ctaButton}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .process-hero,
+  .process-phases,
+  .process-closing,
+  .process-cta {
+    padding: 180px $container-padding;
+    border-top: 1px solid $color-border;
+  }
+
+  .process-hero-inner,
+  .process-phases-inner,
+  .process-closing-inner,
+  .process-cta-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  h1 {
+    max-width: 1050px;
+    margin: 100px 0 0;
+
+    font-family: $font-display;
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+
+  .process-intro {
+    max-width: 640px;
+    margin: 60px 0 0 120px;
+
+    font-size: 1rem;
+    line-height: 1.75;
+    color: $color-muted;
+  }
+
+  .process-phases {
+    padding-top: 0;
+  }
+
+  .phase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+
+    padding: 100px 0;
+
+    border-top: 1px solid $color-border;
+  }
+
+  .phase:last-child {
+    border-bottom: 1px solid $color-border;
+  }
+
+  .phase-header {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .phase-number {
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: $color-muted;
+  }
+
+  .phase-title {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .phase-subtitle {
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .phase-title h2 {
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .phase-body {
+    max-width: 560px;
+    padding-left: 120px;
+  }
+
+  .phase-description {
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: $color-muted;
+  }
+
+  .phase-points {
+    margin: 48px 0 0;
+    padding: 24px 0 0;
+
+    list-style: none;
+    border-top: 1px solid $color-border;
+  }
+
+  .phase-points li {
+    position: relative;
+
+    padding: 12px 0 12px 20px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    border-bottom: 1px solid $color-border;
+  }
+
+  .phase-points li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: $color-accent;
+  }
+
+  .process-closing-content {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 100px;
+
+    margin-top: 100px;
+  }
+
+  .process-closing-content h2 {
+    max-width: 800px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .process-closing-content p {
+    align-self: end;
+    max-width: 420px;
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .process-cta-content {
+    margin-top: 100px;
+  }
+
+  .process-cta-content h2 {
+    max-width: 900px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .process-cta-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 60px;
+
+    margin-top: 70px;
+    padding-left: 120px;
+  }
+
+  .process-cta-bottom p {
+    max-width: 460px;
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .process-cta-bottom a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: $color-accent;
+  }
+
+  .process-cta-bottom a span:last-child {
+    font-size: 1.1rem;
+    transition: transform $transition-fast;
+  }
+
+  .process-cta-bottom a:hover span:last-child {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 900px) {
+    .process-hero,
+    .process-phases,
+    .process-closing,
+    .process-cta {
+      padding: 120px $container-padding;
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: clamp(3.5rem, 13vw, 6rem);
+    }
+
+    .process-intro {
+      margin: 48px 0 0;
+    }
+
+    .phase {
+      grid-template-columns: 1fr;
+      gap: 48px;
+
+      padding: 80px 0;
+    }
+
+    .phase-header {
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+    }
+
+    .phase-title h2 {
+      font-size: clamp(3rem, 11vw, 5rem);
+    }
+
+    .phase-body {
+      max-width: 600px;
+      padding-left: 68px;
+    }
+
+    .process-closing-content {
+      grid-template-columns: 1fr;
+      gap: 48px;
+
+      margin-top: 80px;
+    }
+
+    .process-closing-content h2,
+    .process-cta-content h2 {
+      font-size: clamp(3rem, 12vw, 5rem);
+    }
+
+    .process-cta-content {
+      margin-top: 80px;
+    }
+
+    .process-cta-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+
+      margin-top: 60px;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .phase-body {
+      padding-left: 0;
+    }
+  }
+</style>

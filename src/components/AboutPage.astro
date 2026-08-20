@@ -1,0 +1,497 @@
+---
+const isEnglish = Astro.currentLocale === "en";
+
+const content = isEnglish
+  ? {
+      label: "About",
+      title: "Technology is a tool.",
+      titleAccent: "The thinking behind it matters more.",
+      intro:
+        "I'm Giuseppe, an independent software developer based in Naples, Italy. I build digital products for people and businesses that need something more considered than an off-the-shelf solution.",
+      paragraphs: [
+        "My background is in software development, with a particular focus on frontend development, web applications and the systems that connect them. Over the years, I've learned that writing good code is only one part of building a useful product.",
+        "The other part is understanding what the product is actually supposed to do. That means asking questions, simplifying where possible and making deliberate choices about technology, structure and experience.",
+        "ANANKE grew from this idea: software should not exist for its own sake. It should solve a problem, support a process or make something possible that wasn't before.",
+      ],
+      expertiseLabel: "What I bring",
+      expertise: [
+        {
+          number: "01",
+          title: "Technical thinking",
+          description:
+            "A solid software development background and a pragmatic approach to architecture, technologies and implementation.",
+        },
+        {
+          number: "02",
+          title: "Attention to detail",
+          description:
+            "Interfaces, interactions and small decisions matter. I care about the details that make a product feel coherent and intentional.",
+        },
+        {
+          number: "03",
+          title: "A problem-first mindset",
+          description:
+            "Technology is chosen according to the problem, not the other way around. Every project starts with understanding what actually needs to be solved.",
+        },
+      ],
+      philosophyLabel: "The idea behind ANANKE",
+      philosophyTitle: "Build with intention.",
+      philosophyText:
+        "ANANKE is a small, independent software studio. That means fewer layers between an idea and the person building it, more direct communication and a process shaped around the project rather than a fixed formula.",
+      ctaLabel: "Start a project",
+      ctaTitle: "Have something in mind?",
+      ctaText:
+        "Tell me what you're working on. We can start from the problem and figure out where to go from there.",
+      ctaButton: "Get in touch",
+    }
+  : {
+      label: "Chi sono",
+      title: "La tecnologia è uno strumento.",
+      titleAccent: "Il pensiero che c'è dietro conta di più.",
+      intro:
+        "Sono Giuseppe, sviluppatore software indipendente con base a Napoli. Realizzo prodotti digitali per persone e aziende che hanno bisogno di qualcosa di più ragionato rispetto a una soluzione preconfezionata.",
+      paragraphs: [
+        "Il mio percorso nasce dallo sviluppo software, con una particolare attenzione al frontend, alle applicazioni web e ai sistemi che le collegano. Negli anni ho imparato che scrivere buon codice è solo una parte della costruzione di un prodotto utile.",
+        "L'altra parte consiste nel capire cosa quel prodotto debba realmente fare. Significa fare domande, semplificare quando possibile e prendere decisioni consapevoli su tecnologia, struttura ed esperienza.",
+        "ANANKE nasce da questa idea: il software non dovrebbe esistere fine a se stesso. Dovrebbe risolvere un problema, sostenere un processo o rendere possibile qualcosa che prima non lo era.",
+      ],
+      expertiseLabel: "Cosa porto in un progetto",
+      expertise: [
+        {
+          number: "01",
+          title: "Pensiero tecnico",
+          description:
+            "Una solida esperienza nello sviluppo software e un approccio pragmatico ad architettura, tecnologie e implementazione.",
+        },
+        {
+          number: "02",
+          title: "Attenzione ai dettagli",
+          description:
+            "Interfacce, interazioni e piccole decisioni fanno la differenza. Mi interessa tutto ciò che rende un prodotto coerente e intenzionale.",
+        },
+        {
+          number: "03",
+          title: "Partire dal problema",
+          description:
+            "La tecnologia viene scelta in funzione del problema, non il contrario. Ogni progetto parte dalla comprensione di ciò che deve essere realmente risolto.",
+        },
+      ],
+      philosophyLabel: "L'idea dietro ANANKE",
+      philosophyTitle: "Costruire con intenzione.",
+      philosophyText:
+        "ANANKE è uno studio software indipendente. Questo significa meno livelli tra un'idea e chi la costruisce, una comunicazione più diretta e un processo modellato sul progetto invece che su una formula predefinita.",
+      ctaLabel: "Iniziamo un progetto",
+      ctaTitle: "Hai qualcosa in mente?",
+      ctaText:
+        "Raccontami su cosa stai lavorando. Possiamo partire dal problema e capire insieme dove andare.",
+      ctaButton: "Parliamone",
+    };
+---
+
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div class="section-label">
+      <span>/ 01</span>
+      <span>{content.label}</span>
+    </div>
+
+    <h1>
+      {content.title}
+      <br />
+      <span>{content.titleAccent}</span>
+    </h1>
+
+    <p class="about-intro">{content.intro}</p>
+  </div>
+</section>
+
+<section class="about-story">
+  <div class="about-story-inner">
+    <div class="section-label">
+      <span>/ 02</span>
+      <span>{isEnglish ? "Background" : "Percorso"}</span>
+    </div>
+
+    <div class="about-story-content">
+      <div class="about-story-title">
+        <h2>
+          {
+            isEnglish
+              ? "Software, but not only software."
+              : "Software, ma non solo software."
+          }
+        </h2>
+      </div>
+
+      <div class="about-story-text">
+        {content.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-expertise">
+  <div class="about-expertise-inner">
+    <div class="section-label">
+      <span>/ 03</span>
+      <span>{content.expertiseLabel}</span>
+    </div>
+
+    <div class="expertise-list">
+      {
+        content.expertise.map((item) => (
+          <article class="expertise-item">
+            <span class="expertise-number">{item.number}</span>
+
+            <h2>{item.title}</h2>
+
+            <p>{item.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="about-philosophy">
+  <div class="about-philosophy-inner">
+    <div class="section-label">
+      <span>/ 04</span>
+      <span>{content.philosophyLabel}</span>
+    </div>
+
+    <div class="about-philosophy-content">
+      <h2>{content.philosophyTitle}</h2>
+
+      <p>{content.philosophyText}</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-cta">
+  <div class="about-cta-inner">
+    <div class="section-label">
+      <span>/ 05</span>
+      <span>{content.ctaLabel}</span>
+    </div>
+
+    <div class="about-cta-content">
+      <h2>{content.ctaTitle}</h2>
+
+      <div class="about-cta-bottom">
+        <p>{content.ctaText}</p>
+
+        <a href={isEnglish ? "/en/contact" : "/contatti"}>
+          <span>{content.ctaButton}</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .about-hero,
+  .about-story,
+  .about-expertise,
+  .about-philosophy,
+  .about-cta {
+    padding: 180px $container-padding;
+    border-top: 1px solid $color-border;
+  }
+
+  .about-hero-inner,
+  .about-story-inner,
+  .about-expertise-inner,
+  .about-philosophy-inner,
+  .about-cta-inner {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  h1 {
+    max-width: 1050px;
+    margin: 100px 0 0;
+
+    font-family: $font-display;
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+
+  h1 span {
+    color: $color-accent;
+  }
+
+  .about-intro {
+    max-width: 620px;
+    margin: 60px 0 0 120px;
+
+    font-size: 1rem;
+    line-height: 1.75;
+    color: $color-muted;
+  }
+
+  .about-story-content {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 100px;
+
+    margin-top: 100px;
+  }
+
+  .about-story-title h2 {
+    max-width: 800px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .about-story-text {
+    align-self: end;
+    max-width: 420px;
+  }
+
+  .about-story-text p {
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: $color-muted;
+  }
+
+  .about-story-text p + p {
+    margin-top: 24px;
+  }
+
+  .expertise-list {
+    margin-top: 100px;
+    border-top: 1px solid $color-border;
+  }
+
+  .expertise-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+
+    padding: 42px 0;
+
+    border-bottom: 1px solid $color-border;
+  }
+
+  .expertise-number {
+    padding-top: 8px;
+
+    font-family: $font-mono;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: $color-muted;
+  }
+
+  .expertise-item h2 {
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(2.4rem, 4vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+
+  .expertise-item p {
+    max-width: 420px;
+    margin: 8px 0 0;
+
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .about-philosophy {
+    padding-top: 180px;
+  }
+
+  .about-philosophy-content {
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 100px;
+
+    margin-top: 100px;
+  }
+
+  .about-philosophy-content h2 {
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .about-philosophy-content p {
+    align-self: end;
+    max-width: 420px;
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: $color-muted;
+  }
+
+  .about-cta {
+    padding-bottom: 120px;
+  }
+
+  .about-cta-content {
+    margin-top: 100px;
+  }
+
+  .about-cta-content h2 {
+    max-width: 900px;
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .about-cta-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 60px;
+
+    margin-top: 70px;
+    padding-left: 120px;
+  }
+
+  .about-cta-bottom p {
+    max-width: 460px;
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: $color-muted;
+  }
+
+  .about-cta-bottom a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+
+    font-family: $font-mono;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: $color-accent;
+  }
+
+  .about-cta-bottom a span:last-child {
+    font-size: 1.1rem;
+    transition: transform $transition-fast;
+  }
+
+  .about-cta-bottom a:hover span:last-child {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 900px) {
+    .about-hero,
+    .about-story,
+    .about-expertise,
+    .about-philosophy,
+    .about-cta {
+      padding: 120px $container-padding;
+    }
+
+    h1 {
+      margin-top: 80px;
+      font-size: clamp(3.5rem, 13vw, 6rem);
+    }
+
+    .about-intro {
+      margin: 48px 0 0;
+    }
+
+    .about-story-content,
+    .about-philosophy-content {
+      grid-template-columns: 1fr;
+      gap: 48px;
+
+      margin-top: 80px;
+    }
+
+    .about-story-title h2,
+    .about-philosophy-content h2,
+    .about-cta-content h2 {
+      font-size: clamp(3rem, 12vw, 5rem);
+    }
+
+    .expertise-list {
+      margin-top: 80px;
+    }
+
+    .expertise-item {
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      padding: 32px 0;
+    }
+
+    .expertise-item p {
+      grid-column: 2;
+      margin-top: 0;
+    }
+
+    .about-cta-content {
+      margin-top: 80px;
+    }
+
+    .about-cta-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+
+      margin-top: 60px;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .expertise-item {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .expertise-item p {
+      grid-column: auto;
+    }
+  }
+</style>

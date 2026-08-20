@@ -3,9 +3,29 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 
 const currentLocale = Astro.currentLocale ?? "it";
 const isEnglish = currentLocale === "en";
+const currentPath = Astro.url.pathname;
 
-const alternateLocale = isEnglish ? "it" : "en";
-const alternateUrl = getRelativeLocaleUrl(alternateLocale);
+const localeRoutes: Record<string, string> = {
+  "/": "/en/",
+  "/servizi": "/en/services",
+  "/progetti": "/en/work",
+  "/processo": "/en/process",
+  "/chi-sono": "/en/about",
+  "/contatti": "/en/contact",
+};
+
+const englishRoutes: Record<string, string> = {
+  "/en/": "/",
+  "/en/services": "/servizi",
+  "/en/work": "/progetti",
+  "/en/process": "/processo",
+  "/en/about": "/chi-sono",
+  "/en/contact": "/contatti",
+};
+
+const alternateUrl = isEnglish
+  ? (englishRoutes[currentPath] ?? "/")
+  : (localeRoutes[currentPath] ?? "/en/");
 ---
 
 <header class="site-header">
