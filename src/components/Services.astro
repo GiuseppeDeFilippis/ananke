@@ -1,80 +1,95 @@
 ---
 const isEnglish = Astro.currentLocale === "en";
 
-const services = isEnglish
-  ? [
-      {
-        number: "01",
-        title: "Websites",
-        description:
-          "Digital presences that are clear, fast and carefully designed.",
-      },
-      {
-        number: "02",
-        title: "Web applications",
-        description:
-          "Digital tools designed around real needs and specific workflows.",
-      },
-      {
-        number: "03",
-        title: "Custom software",
-        description:
-          "Tailored solutions for processes that require something more.",
-      },
-      {
-        number: "04",
-        title: "Automation",
-        description: "Simpler processes through tailored tools and workflows.",
-      },
-    ]
-  : [
-      {
-        number: "01",
-        title: "Siti web",
-        description:
-          "Presenze digitali chiare, veloci e curate in ogni dettaglio.",
-      },
-      {
-        number: "02",
-        title: "Applicazioni web",
-        description:
-          "Strumenti digitali progettati intorno a esigenze reali e processi specifici.",
-      },
-      {
-        number: "03",
-        title: "Software su misura",
-        description:
-          "Soluzioni costruite per processi che richiedono qualcosa di più.",
-      },
-      {
-        number: "04",
-        title: "Automazione",
-        description:
-          "Processi più semplici attraverso strumenti e flussi progettati su misura.",
-      },
-    ];
+const content = isEnglish
+  ? {
+      eyebrow: "What we can build",
+      title: "Digital tools for problems worth solving.",
+      services: [
+        {
+          number: "01",
+          title: "Websites",
+          description:
+            "Digital presences designed to communicate clearly, express an identity and work well across every screen.",
+          href: "/en/services#websites",
+        },
+        {
+          number: "02",
+          title: "Web applications",
+          description:
+            "Interfaces and digital tools built around specific needs, workflows and the people who use them.",
+          href: "/en/services#web-applications",
+        },
+        {
+          number: "03",
+          title: "Custom software",
+          description:
+            "Software designed from the ground up when existing tools are not enough for the way a business works.",
+          href: "/en/services#custom-software",
+        },
+        {
+          number: "04",
+          title: "Automation",
+          description:
+            "Processes simplified through tailored tools, integrations and workflows that remove unnecessary work.",
+          href: "/en/services#automation",
+        },
+      ],
+    }
+  : {
+      eyebrow: "Cosa possiamo costruire",
+      title: "Strumenti digitali per problemi che vale la pena risolvere.",
+      services: [
+        {
+          number: "01",
+          title: "Siti web",
+          description:
+            "Presenze digitali progettate per comunicare con chiarezza, esprimere un'identità e funzionare bene su ogni schermo.",
+          href: "/servizi#websites",
+        },
+        {
+          number: "02",
+          title: "Applicazioni web",
+          description:
+            "Interfacce e strumenti digitali costruiti intorno a esigenze, processi e persone specifiche.",
+          href: "/servizi#web-applications",
+        },
+        {
+          number: "03",
+          title: "Software su misura",
+          description:
+            "Software progettato da zero quando gli strumenti esistenti non sono sufficienti per il modo in cui un'attività lavora.",
+          href: "/servizi#custom-software",
+        },
+        {
+          number: "04",
+          title: "Automazione",
+          description:
+            "Processi semplificati attraverso strumenti, integrazioni e flussi progettati per eliminare il lavoro superfluo.",
+          href: "/servizi#automation",
+        },
+      ],
+    };
 ---
 
 <section class="services">
   <div class="services-inner">
-    <div class="section-label">
-      <span>/ 03</span>
-      <span>{isEnglish ? "Services" : "Servizi"}</span>
+    <div class="services-header">
+      <span class="eyebrow">{content.eyebrow}</span>
+
+      <h2>{content.title}</h2>
     </div>
 
     <div class="services-list">
       {
-        services.map((service) => (
-          <a href="/contatti" class="service">
-            <div class="service-number">{service.number}</div>
+        content.services.map((service) => (
+          <a class="service" href={service.href}>
+            <span class="service-number">{service.number}</span>
 
-            <div class="service-content">
-              <h2>{service.title}</h2>
+            <div class="service-main">
+              <h3>{service.title}</h3>
+
               <p>{service.description}</p>
-            </div>
-
-            <div class="service-arrow" aria-hidden="true">
-              ↗
             </div>
           </a>
         ))
@@ -87,114 +102,285 @@ const services = isEnglish
   @use "../styles/variables" as *;
 
   .services {
-    padding: 180px $container-padding;
-    border-top: 1px solid $color-border;
+    background: $color-cream;
+    color: $color-ink;
+
+    padding: 160px 0 180px;
   }
 
   .services-inner {
-    width: 100%;
-    max-width: $container-max-width;
-    margin: 0 auto;
+    width: min(
+      calc(100% - (#{$container-padding} * 2)),
+      $container-max-width
+    );
+
+    margin-inline: auto;
   }
 
-  .section-label {
-    display: flex;
-    align-items: center;
+  /* --------------------------------
+     Header
+  -------------------------------- */
+
+  .services-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     gap: 24px;
 
-    font-family: $font-mono;
-    font-size: 0.65rem;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: $color-muted;
+    margin-bottom: 110px;
   }
 
+  .eyebrow {
+    grid-column: 1 / span 3;
+
+    align-self: start;
+
+    color: $color-green;
+
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    grid-column: 4 / span 8;
+
+    max-width: 850px;
+
+    margin: 0;
+
+    font-family: $font-display;
+    font-size: clamp(3.5rem, 5.8vw, 6.2rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+  }
+
+  /* --------------------------------
+     Services list
+  -------------------------------- */
+
   .services-list {
-    margin-top: 100px;
     border-top: 1px solid $color-border;
   }
 
   .service {
-    display: grid;
-    grid-template-columns: 80px 1fr auto;
-    align-items: start;
-    gap: 40px;
+    position: relative;
 
-    padding: 42px 0;
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    gap: 24px;
+
+    align-items: start;
+
+    padding: 42px 0 44px;
+
     border-bottom: 1px solid $color-border;
 
-    color: $color-text;
-    transition: padding $transition-fast;
+    transition:
+      padding $transition-base,
+      background-color $transition-base;
+  }
+
+  .service::before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 3px;
+
+    background: $color-green;
+
+    transform: scaleY(0);
+    transform-origin: center;
+
+    transition: transform $transition-base;
   }
 
   .service-number {
-    padding-top: 8px;
+    color: $color-green;
 
     font-family: $font-mono;
-    font-size: 0.65rem;
+    font-size: 0.68rem;
+    line-height: 1.5;
     letter-spacing: 0.08em;
-    color: $color-muted;
   }
 
-  .service-content h2 {
+  .service-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  h3 {
     margin: 0;
 
     font-family: $font-display;
-    font-size: clamp(2.4rem, 4vw, 4.5rem);
+    font-size: clamp(2rem, 3vw, 3.2rem);
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.025em;
   }
 
-  .service-content p {
-    max-width: 520px;
-    margin: 20px 0 0;
+  .service p {
+    max-width: 390px;
+
+    margin: 2px 0 0;
+
+    color: $color-muted;
 
     font-size: 0.95rem;
-    line-height: 1.6;
-    color: $color-muted;
+    line-height: 1.65;
   }
 
-  .service-arrow {
-    padding-top: 6px;
-
-    font-family: $font-mono;
-    font-size: 1.1rem;
-    color: $color-accent;
-
-    transition: transform $transition-fast;
-  }
+  /* --------------------------------
+     Interaction
+  -------------------------------- */
 
   .service:hover {
-    padding-left: 12px;
+    padding-left: 18px;
+    background: rgba($color-green, 0.035);
   }
 
-  .service:hover .service-arrow {
-    transform: translate(3px, -3px);
+  .service:hover::before {
+    transform: scaleY(1);
   }
 
-  @media (max-width: 900px) {
+  /* --------------------------------
+     Tablet
+  -------------------------------- */
+
+  @media (max-width: 1000px) {
     .services {
-      padding: 120px $container-padding;
+      padding: 120px 0 140px;
     }
 
-    .services-list {
-      margin-top: 80px;
+    .services-header {
+      margin-bottom: 80px;
+    }
+
+    .eyebrow {
+      grid-column: 1 / span 3;
+    }
+
+    h2 {
+      grid-column: 4 / span 9;
+
+      font-size: clamp(3.2rem, 5.8vw, 5.5rem);
     }
 
     .service {
-      grid-template-columns: 48px 1fr auto;
+      grid-template-columns: 1fr 8fr;
+    }
+
+    .service-main {
+      grid-template-columns: 1fr;
       gap: 20px;
-      padding: 32px 0;
     }
 
-    .service-content h2 {
-      font-size: clamp(2.2rem, 9vw, 3.5rem);
+    .service p {
+      max-width: 520px;
+    }
+  }
+
+  /* --------------------------------
+     Mobile
+  -------------------------------- */
+
+  @media (max-width: 768px) {
+    .services {
+      padding: 90px 0 100px;
     }
 
-    .service-content p {
-      margin-top: 14px;
+    .services-header {
+      display: block;
+
+      margin-bottom: 64px;
+    }
+
+    .eyebrow {
+      display: block;
+
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: clamp(3rem, 13vw, 5rem);
+      line-height: 0.92;
+    }
+
+    .service {
+      grid-template-columns: 40px 1fr;
+
+      gap: 16px;
+
+      padding: 32px 0 34px;
+    }
+
+    .service-main {
+      display: block;
+    }
+
+    h3 {
+      font-size: clamp(2rem, 8vw, 2.7rem);
+    }
+
+    .service p {
+      max-width: 440px;
+
+      margin-top: 20px;
+
+      font-size: 0.92rem;
+    }
+
+    .service:hover {
+      padding-left: 0;
+    }
+
+    .service::before {
+      width: 2px;
+    }
+  }
+
+  /* --------------------------------
+     Small mobile
+  -------------------------------- */
+
+  @media (max-width: 480px) {
+    .services {
+      padding: 72px 0 80px;
+    }
+
+    .services-header {
+      margin-bottom: 48px;
+    }
+
+    .eyebrow {
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(2.8rem, 13.5vw, 4.5rem);
+    }
+
+    .service {
+      grid-template-columns: 32px 1fr;
+
+      gap: 12px;
+
+      padding: 28px 0 30px;
+    }
+
+    h3 {
+      font-size: 2rem;
+    }
+
+    .service p {
+      margin-top: 16px;
     }
   }
 </style>

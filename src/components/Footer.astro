@@ -3,78 +3,68 @@ const isEnglish = Astro.currentLocale === "en";
 
 const content = isEnglish
   ? {
-      navigation: "Navigation",
-      contact: "Get in touch",
-      contactText: "Have a project in mind?",
-      email: "giuseppe@ananke.dev",
-      copyright: "© 2026 Giuseppe De Filippis. All rights reserved.",
+      nav: [
+        { label: "Services", href: "/en/services" },
+        { label: "Work", href: "/en/work" },
+        { label: "Process", href: "/en/process" },
+        { label: "Studio", href: "/en/about" },
+        { label: "Contact", href: "/en/contact" },
+      ],
+      contact: "giuseppe@ananke.dev",
+      language: "IT",
     }
   : {
-      navigation: "Navigazione",
-      contact: "Contatti",
-      contactText: "Hai un progetto in mente?",
-      email: "giuseppe@ananke.dev",
-      copyright: "© 2026 Giuseppe De Filippis. Tutti i diritti riservati.",
+      nav: [
+        { label: "Servizi", href: "/servizi" },
+        { label: "Progetti", href: "/progetti" },
+        { label: "Processo", href: "/processo" },
+        { label: "Studio", href: "/chi-sono" },
+        { label: "Contatti", href: "/contatti" },
+      ],
+      contact: "giuseppe@ananke.dev",
+      language: "EN",
     };
-
-const navigation = isEnglish
-  ? [
-      { label: "Home", href: "/" },
-      { label: "Services", href: "/servizi" },
-      { label: "Projects", href: "/progetti" },
-      { label: "Process", href: "/processo" },
-      { label: "About", href: "/chi-sono" },
-      { label: "Contact", href: "/contatti" },
-    ]
-  : [
-      { label: "Home", href: "/" },
-      { label: "Servizi", href: "/servizi" },
-      { label: "Progetti", href: "/progetti" },
-      { label: "Processo", href: "/processo" },
-      { label: "Chi sono", href: "/chi-sono" },
-      { label: "Contatti", href: "/contatti" },
-    ];
 ---
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="/" class="footer-logo">
-          <span class="footer-logo-name">ANANKE</span>
-          <span class="footer-logo-subtitle">INDEPENDENT SOFTWARE STUDIO</span>
+    <div class="footer-main">
+      <a
+        href={isEnglish ? "/en/" : "/"}
+        class="footer-brand"
+        aria-label="ANANKE"
+      >
+        <span class="footer-logo">ANANKE</span>
+
+        <span class="footer-subtitle">
+          Independent Software Studio
+        </span>
+      </a>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        {
+          content.nav.map((item) => (
+            <a href={item.href}>
+              {item.label}
+            </a>
+          ))
+        }
+
+        <a
+          href={isEnglish ? "/" : "/en/"}
+          class="footer-language"
+        >
+          {content.language}
         </a>
-      </div>
-
-      <div class="footer-contact">
-        <span class="footer-label">{content.contact}</span>
-
-        <a href="/contatti" class="footer-contact-link">
-          {content.contactText}
-          <span aria-hidden="true">↗</span>
-        </a>
-
-        <a href="mailto:{content.email}" class="footer-email">
-          {content.email}
-        </a>
-      </div>
-
-      <nav class="footer-navigation" aria-label={content.navigation}>
-        <span class="footer-label">{content.navigation}</span>
-
-        <div class="footer-links">
-          {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
-        </div>
       </nav>
     </div>
 
     <div class="footer-bottom">
-      <span>{content.copyright}</span>
+      <span>© {new Date().getFullYear()} ANANKE</span>
 
-      <div class="footer-meta">
-        <a href="/privacy">Privacy</a>
-        <a href="/cookie">Cookie</a>
-      </div>
+      <a href={`mailto:${content.contact}`}>
+        {content.contact}
+      </a>
     </div>
   </div>
 </footer>
@@ -83,201 +73,201 @@ const navigation = isEnglish
   @use "../styles/variables" as *;
 
   .footer {
-    padding: 70px $container-padding 28px;
+    padding: 64px 0 32px;
+
+    background: $color-cream;
+    color: $color-ink;
+
     border-top: 1px solid $color-border;
   }
 
   .footer-inner {
-    width: 100%;
-    max-width: $container-max-width;
-    margin: 0 auto;
+    width: min(
+      calc(100% - (#{$container-padding} * 2)),
+      $container-max-width
+    );
+
+    margin-inline: auto;
   }
 
-  .footer-top {
+  /* --------------------------------
+     Main
+  -------------------------------- */
+
+  .footer-main {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
 
-    padding-bottom: 70px;
-  }
-
-  .footer-brand,
-  .footer-contact,
-  .footer-navigation {
-    display: flex;
-    flex-direction: column;
+    padding-bottom: 64px;
   }
 
   .footer-brand {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
+
+    width: fit-content;
   }
 
   .footer-logo {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
+    color: $color-green;
 
-    color: $color-text;
-  }
-
-  .footer-logo-name {
     font-family: $font-display;
-    font-size: 1.8rem;
-    line-height: 1;
+    font-size: 2rem;
+    line-height: 0.9;
     letter-spacing: -0.03em;
   }
 
-  .footer-logo-subtitle {
-    margin-top: 6px;
+  .footer-subtitle {
+    margin-top: 8px;
 
-    font-family: $font-mono;
-    font-size: 0.65rem;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: $color-muted;
-  }
-
-  .footer-label {
-    font-family: $font-mono;
-    font-size: 0.65rem;
-    line-height: 1.4;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: $color-muted;
-  }
-
-  .footer-contact {
-    gap: 14px;
-  }
-
-  .footer-contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-
-    width: fit-content;
-
-    font-family: $font-display;
-    font-size: 1.35rem;
-    line-height: 1.1;
-
-    color: $color-text;
-  }
-
-  .footer-contact-link span {
-    font-family: $font-mono;
-    font-size: 0.9rem;
-    color: $color-accent;
-
-    transition: transform $transition-fast;
-  }
-
-  .footer-contact-link:hover span {
-    transform: translate(3px, -3px);
-  }
-
-  .footer-email {
-    width: fit-content;
-
-    font-size: 0.85rem;
     color: $color-muted;
 
-    transition: color $transition-fast;
-  }
-
-  .footer-email:hover {
-    color: $color-text;
-  }
-
-  .footer-navigation {
-    gap: 14px;
-  }
-
-  .footer-links {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 8px 30px;
-  }
-
-  .footer-links a {
-    width: fit-content;
-
-    font-size: 0.85rem;
-    color: $color-text;
-
-    transition: color $transition-fast;
-  }
-
-  .footer-links a:hover {
-    color: $color-accent;
-  }
-
-  .footer-bottom {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-
-    padding-top: 20px;
-    border-top: 1px solid $color-border;
-
     font-family: $font-mono;
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     line-height: 1.4;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: $color-muted;
   }
 
-  .footer-meta {
+  /* --------------------------------
+     Navigation
+  -------------------------------- */
+
+  .footer-nav {
     display: flex;
-    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    gap: 10px 32px;
   }
 
-  .footer-meta a {
-    color: $color-muted;
+  .footer-nav a {
+    color: $color-ink;
+
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    line-height: 1.4;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+
     transition: color $transition-fast;
   }
 
-  .footer-meta a:hover {
-    color: $color-text;
+  .footer-nav a:hover {
+    color: $color-green;
   }
 
-  @media (max-width: 900px) {
+  .footer-language {
+    margin-left: 16px;
+
+    color: $color-green !important;
+  }
+
+  /* --------------------------------
+     Bottom
+  -------------------------------- */
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 20px;
+
+    border-top: 1px solid $color-border;
+
+    color: $color-muted;
+
+    font-family: $font-mono;
+    font-size: 0.62rem;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-bottom a {
+    color: inherit;
+
+    transition: color $transition-fast;
+  }
+
+  .footer-bottom a:hover {
+    color: $color-green;
+  }
+
+  /* --------------------------------
+     Tablet
+  -------------------------------- */
+
+  @media (max-width: 1000px) {
     .footer {
-      padding: 60px $container-padding 24px;
+      padding-top: 56px;
     }
 
-    .footer-top {
-      grid-template-columns: 1fr 1fr;
-      gap: 50px 40px;
+    .footer-main {
+      grid-template-columns: 1fr 2fr;
 
-      padding-bottom: 60px;
+      padding-bottom: 56px;
     }
 
-    .footer-brand {
-      grid-column: 1 / -1;
-      min-height: auto;
-      gap: 20px;
+    .footer-nav {
+      gap: 10px 24px;
     }
   }
 
-  @media (max-width: 600px) {
-    .footer-top {
-      grid-template-columns: 1fr;
-      gap: 40px;
+  /* --------------------------------
+     Mobile
+  -------------------------------- */
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 48px 0 24px;
+    }
+
+    .footer-main {
+      display: block;
+
+      padding-bottom: 48px;
     }
 
     .footer-brand {
-      grid-column: auto;
+      margin-bottom: 40px;
+    }
+
+    .footer-nav {
+      justify-content: flex-start;
+
+      gap: 16px 24px;
+    }
+
+    .footer-language {
+      margin-left: 0;
     }
 
     .footer-bottom {
+      display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 16px;
+      gap: 8px;
+    }
+  }
+
+  /* --------------------------------
+     Small mobile
+  -------------------------------- */
+
+  @media (max-width: 480px) {
+    .footer {
+      padding-top: 40px;
+    }
+
+    .footer-main {
+      padding-bottom: 40px;
+    }
+
+    .footer-nav {
+      gap: 14px 20px;
     }
   }
 </style>

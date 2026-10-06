@@ -9,12 +9,14 @@ interface Props {
 
 const {
   title,
-  description = "ANANKE — Independent Software Studio by Giuseppe De Filippis.",
+  description = "ANANKE — Independent Software Studio.",
 } = Astro.props;
+
+const locale = Astro.currentLocale ?? "it";
 ---
 
 <!doctype html>
-<html lang="it">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />

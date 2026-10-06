@@ -1,25 +1,18 @@
-// ========================================
-// ANANKE — Design System
-// ========================================
+$color-green: #294547;
+$color-green-light: #dde7e4;
 
-// Colors
-$color-bg: #f5f3ee;
-$color-surface: #eae6de;
-$color-text: #171717;
+$color-cream: #f5f3ee;
+$color-ink: #171717;
 $color-muted: #6f6d68;
-$color-accent: #294547;
-$color-border: #d8d4cc;
+$color-border: #d5d1c9;
 
-// Typography
 $font-display: "DM Serif Display", Georgia, serif;
 $font-body: "Inter", Arial, sans-serif;
 $font-mono: "IBM Plex Mono", "Courier New", monospace;
 
-// Layout
 $container-max-width: 1280px;
 $container-padding: 24px;
 
-// Spacing
 $space-xs: 8px;
 $space-sm: 16px;
 $space-md: 24px;
@@ -28,10 +21,14 @@ $space-xl: 80px;
 $space-2xl: 120px;
 $space-3xl: 180px;
 
-// Border radius
 $radius-sm: 2px;
-$radius-md: 6px;
 
-// Transitions
 $transition-fast: 180ms ease;
 $transition-base: 300ms ease;
+$transition-slow: 500ms ease;
+
+// Legacy aliases
+$color-bg: $color-cream;
+$color-surface: $color-green-light;
+$color-text: $color-ink;
+$color-accent: $color-green;

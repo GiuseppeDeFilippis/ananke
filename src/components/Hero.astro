@@ -1,54 +1,33 @@
 ---
 const isEnglish = Astro.currentLocale === "en";
+
+const content = isEnglish
+  ? {
+      title: "Every solution begins with a question.",
+      statement:
+        "We don't start with technology. We start with what needs to work.",
+    }
+  : {
+      title: "Ogni soluzione comincia da una domanda.",
+      statement:
+        "Non partiamo dalla tecnologia. Partiamo da ciò che deve funzionare.",
+    };
 ---
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-label">
-      <span>/ 01</span>
-      <span>Independent Software Studio</span>
-    </div>
+    <div class="hero-composition">
+      <div class="hero-statement">
+        <h1>{content.title}</h1>
+      </div>
 
-    <div class="hero-content">
-      <h1>
-        {
-          isEnglish ? (
-            <>
-              Think.
-              <br />
-              Design.
-              <br />
-              Build.
-            </>
-          ) : (
-            <>
-              Pensare.
-              <br />
-              Progettare.
-              <br />
-              Costruire.
-            </>
-          )
-        }
-      </h1>
+      <div class="hero-green">
+        <div class="green-content">
+          <p>{content.statement}</p>
 
-      <div class="hero-footer">
-        <p>
-          {
-            isEnglish
-              ? "Websites, web applications and custom software."
-              : "Siti web, applicazioni web e software su misura."
-          }
-        </p>
-
-        <span class="hero-author"> by Giuseppe De Filippis </span>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="hero-scroll" aria-hidden="true">
-    <span>{isEnglish ? "Scroll to explore" : "Scorri per esplorare"}</span>
-    <span>↓</span>
   </div>
 </section>
 
@@ -56,116 +35,231 @@ const isEnglish = Astro.currentLocale === "en";
   @use "../styles/variables" as *;
 
   .hero {
-    position: relative;
-    min-height: calc(100vh - 90px);
-    padding: 80px $container-padding 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 48px 0 0;
+    background: $color-cream;
   }
 
   .hero-inner {
-    width: 100%;
-    max-width: $container-max-width;
-    margin: 0 auto;
+    width: min(
+      calc(100% - (#{$container-padding} * 2)),
+      $container-max-width
+    );
+
+    margin-inline: auto;
   }
 
-  .hero-label {
+  /* --------------------------------
+     Main composition
+  -------------------------------- */
+
+  .hero-composition {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(280px, 4fr);
+
+    height: calc(100svh - 165px);
+
+    min-height: 500px;
+
+    margin-top: 20px;
+  }
+
+  .hero-statement {
     display: flex;
     align-items: center;
-    gap: 24px;
 
-    font-family: $font-mono;
-    font-size: 0.65rem;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: $color-muted;
+    padding: 24px 56px 40px 0;
   }
 
-  .hero-content {
-    margin-top: clamp(100px, 18vh, 180px);
-  }
-
-  .hero h1 {
+  h1 {
     max-width: 900px;
+
+    margin: 0;
+
+    color: $color-ink;
+
+    font-family: $font-display;
+    font-size: clamp(3.7rem, 6.2vw, 6.5rem);
+    font-weight: 400;
+    line-height: 0.89;
+    letter-spacing: -0.045em;
+  }
+
+  /* --------------------------------
+     Green surface
+  -------------------------------- */
+
+  .hero-green {
+    position: relative;
+
+    height: min(330px, 70%);
+    align-self: center;
+
+    background: $color-green;
+    color: $color-cream;
+  }
+
+  .green-content {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 28px;
+  }
+
+  .green-content p {
+    max-width: 290px;
+
     margin: 0;
 
     font-family: $font-display;
-    font-size: clamp(3.8rem, 6.5vw, 6.5rem);
-    font-weight: 400;
+    font-size: clamp(1.45rem, 2vw, 2rem);
     line-height: 0.98;
-    letter-spacing: -0.035em;
-    color: $color-text;
+    letter-spacing: -0.025em;
   }
 
-  .hero-footer {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 40px;
-    margin-top: 48px;
-    max-width: 760px;
-  }
+  .green-number {
+    align-self: flex-end;
 
-  .hero-footer p {
-    max-width: 440px;
-    margin: 0;
-
-    font-size: 1rem;
-    line-height: 1.6;
-    color: $color-muted;
-  }
-
-  .hero-author {
     font-family: $font-mono;
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     line-height: 1.4;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .hero-scroll {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    width: 100%;
-    max-width: $container-max-width;
-    margin: 0 auto;
-
-    font-family: $font-mono;
-    font-size: 0.6rem;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: $color-muted;
   }
 
-  .hero-scroll span:last-child {
-    font-size: 1rem;
-  }
+  /* --------------------------------
+     Tablet
+  -------------------------------- */
 
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
     .hero {
-      min-height: calc(100vh - 80px);
-      padding-top: 60px;
+      padding-top: 40px;
+    }
+
+    .hero-composition {
+      grid-template-columns: minmax(0, 7fr) minmax(230px, 5fr);
+
+      height: calc(100svh - 150px);
+
+      min-height: 480px;
+    }
+
+    .hero-statement {
+      padding-right: 36px;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 7vw, 6rem);
+    }
+
+    .hero-green {
+      height: min(310px, 68%);
+    }
+
+    .green-content {
+      padding: 24px;
+    }
+
+    .green-content p {
+      font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+    }
+  }
+
+  /* --------------------------------
+     Mobile
+  -------------------------------- */
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 36px 0 64px;
+    }
+
+    .hero-inner {
+      width: calc(100% - 40px);
+    }
+
+    .hero-composition {
+      display: block;
+
+      height: auto;
+      min-height: 0;
+
+      margin-top: 48px;
+    }
+
+    .hero-statement {
+      display: block;
+
+      padding: 0 0 36px;
+    }
+
+    h1 {
+      max-width: 620px;
+
+      font-size: clamp(3.2rem, 13vw, 5rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-green {
+      width: 78%;
+      height: 260px;
+      min-height: 0;
+
+      margin-left: auto;
+    }
+
+    .green-content {
+      padding: 24px;
+    }
+
+    .green-content p {
+      max-width: 250px;
+
+      font-size: clamp(1.45rem, 6vw, 1.9rem);
+    }
+  }
+
+  /* --------------------------------
+     Small mobile
+  -------------------------------- */
+
+  @media (max-width: 480px) {
+    .hero {
+      padding-top: 28px;
+    padding-bottom: 56px;
+    }
+
+    .hero-inner {
+      width: calc(100% - 40px);
+    }
+
+    .hero-composition {
+      margin-top: 44px;
+    }
+
+    .hero-statement {
       padding-bottom: 32px;
     }
 
-    .hero-content {
-      margin-top: 100px;
+    h1 {
+      font-size: clamp(3rem, 13.5vw, 4.5rem);
     }
 
-    .hero h1 {
-      font-size: clamp(3.2rem, 13vw, 5rem);
+    .hero-green {
+      width: 82%;
+      height: 220px;
     }
 
-    .hero-footer {
-      flex-direction: column;
-      align-items: flex-start;
-      margin-top: 40px;
-      gap: 20px;
+    .green-content {
+      padding: 20px;
+    }
+
+    .green-content p {
+      max-width: 220px;
+      font-size: 1.4rem;
     }
   }
 </style>

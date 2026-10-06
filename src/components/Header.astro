@@ -2,7 +2,6 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 const currentLocale = Astro.currentLocale ?? "it";
-const isEnglish = currentLocale === "en";
 const currentPath = Astro.url.pathname;
 
 const localeRoutes: Record<string, string> = {
@@ -23,211 +22,299 @@ const englishRoutes: Record<string, string> = {
   "/en/contact": "/contatti",
 };
 
-const alternateUrl = isEnglish
-  ? (englishRoutes[currentPath] ?? "/")
-  : (localeRoutes[currentPath] ?? "/en/");
+const alternateUrl =
+  currentLocale === "en"
+    ? englishRoutes[currentPath] ?? "/"
+    : localeRoutes[currentPath] ?? "/en/";
+
+const isEnglish = currentLocale === "en";
 ---
 
 <header class="site-header">
-  <div class="header-container">
+  <div class="header-inner">
     <a
-      href={getRelativeLocaleUrl(currentLocale)}
       class="brand"
-      aria-label="ANANKE — Home"
+      href={getRelativeLocaleUrl(currentLocale)}
+      aria-label="ANANKE — home"
     >
       <span class="brand-name">ANANKE</span>
       <span class="brand-subtitle">Independent Software Studio</span>
     </a>
 
-    <nav
-      class="main-nav"
-      aria-label={isEnglish ? "Main navigation" : "Navigazione principale"}
-    >
-      {
-        isEnglish ? (
-          <>
-            <a href="/en/services">Services</a>
-            <a href="/en/work">Work</a>
-            <a href="/en/process">Process</a>
-            <a href="/en/about">About</a>
-          </>
-        ) : (
-          <>
-            <a href="/servizi">Servizi</a>
-            <a href="/progetti">Progetti</a>
-            <a href="/processo">Processo</a>
-            <a href="/chi-sono">Chi sono</a>
-          </>
-        )
-      }
-    </nav>
-
-    <div class="header-actions">
-      <a href={isEnglish ? "/en/contact" : "/contatti"} class="contact-link">
-        <span>{isEnglish ? "Contact" : "Contatti"}</span>
-        <span aria-hidden="true">↗</span>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href={isEnglish ? "/en/services" : "/servizi"}>
+        {isEnglish ? "Services" : "Servizi"}
       </a>
 
-      <div class="language-switcher" aria-label="Language">
-        {
-          isEnglish ? (
-            <>
-              <a href={alternateUrl}>IT</a>
-              <span aria-hidden="true">/</span>
-              <span class="active">EN</span>
-            </>
-          ) : (
-            <>
-              <span class="active">IT</span>
-              <span aria-hidden="true">/</span>
-              <a href={alternateUrl}>EN</a>
-            </>
-          )
-        }
-      </div>
+      <a href={isEnglish ? "/en/work" : "/progetti"}>
+        {isEnglish ? "Work" : "Progetti"}
+      </a>
 
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-label={isEnglish ? "Open menu" : "Apri menu"}
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
-      </button>
-    </div>
+      <a href={isEnglish ? "/en/process" : "/processo"}>
+        {isEnglish ? "Process" : "Processo"}
+      </a>
+
+      <a href={isEnglish ? "/en/about" : "/chi-sono"}>
+        {isEnglish ? "Studio" : "Studio"}
+      </a>
+
+      <a href={isEnglish ? "/en/contact" : "/contatti"}>
+        {isEnglish ? "Contact" : "Contatti"}
+      </a>
+
+      <a class="language-link" href={alternateUrl}>
+        {isEnglish ? "IT" : "EN"}
+      </a>
+    </nav>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label={isEnglish ? "Open menu" : "Apri menu"}
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span>Menu</span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <nav aria-label="Mobile navigation">
+      <a href={isEnglish ? "/en/services" : "/servizi"}>
+        {isEnglish ? "Services" : "Servizi"}
+      </a>
+
+      <a href={isEnglish ? "/en/work" : "/progetti"}>
+        {isEnglish ? "Work" : "Progetti"}
+      </a>
+
+      <a href={isEnglish ? "/en/process" : "/processo"}>
+        {isEnglish ? "Process" : "Processo"}
+      </a>
+
+      <a href={isEnglish ? "/en/about" : "/chi-sono"}>
+        Studio
+      </a>
+
+      <a href={isEnglish ? "/en/contact" : "/contatti"}>
+        {isEnglish ? "Contact" : "Contatti"}
+      </a>
+
+      <a class="mobile-language" href={alternateUrl}>
+        {isEnglish ? "Italiano" : "English"}
+      </a>
+    </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const menu = document.querySelector<HTMLElement>(".mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    menu?.classList.toggle("is-open", !isOpen);
+    document.body.classList.toggle("menu-open", !isOpen);
+  });
+
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.setAttribute("aria-expanded", "false");
+      menu?.classList.remove("is-open");
+      document.body.classList.remove("menu-open");
+    });
+  });
+</script>
 
 <style lang="scss">
   @use "../styles/variables" as *;
 
   .site-header {
-    width: 100%;
-    padding: 24px $container-padding;
+    position: relative;
+    z-index: 100;
+    padding: 24px 0;
   }
 
-  .header-container {
+  .header-inner {
+    width: min(
+      calc(100% - (#{$container-padding} * 2)),
+      $container-max-width
+    );
+
+    margin-inline: auto;
+
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 40px;
-    max-width: $container-max-width;
-    margin: 0 auto;
   }
 
   .brand {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    flex-shrink: 0;
+    color: $color-green;
   }
 
   .brand-name {
     font-family: $font-display;
-    font-size: 1.6rem;
-    line-height: 1;
-    letter-spacing: -0.02em;
+    font-size: 2rem;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
   }
 
   .brand-subtitle {
+    margin-top: 7px;
+
     font-family: $font-mono;
-    font-size: 0.55rem;
+    font-size: 0.6rem;
     line-height: 1.2;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: $color-muted;
   }
 
-  .main-nav {
+  .desktop-nav {
     display: flex;
     align-items: center;
-    gap: 32px;
-    margin-left: auto;
-  }
+    gap: 28px;
 
-  .main-nav a,
-  .contact-link,
-  .language-switcher {
+    padding-top: 5px;
+
     font-family: $font-mono;
     font-size: 0.7rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 
-  .main-nav a {
-    color: $color-muted;
+  .desktop-nav a {
+    position: relative;
     transition: color $transition-fast;
   }
 
-  .main-nav a:hover {
-    color: $color-text;
-  }
+  .desktop-nav a:not(.language-link)::after {
+    content: "";
 
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
+    position: absolute;
+    left: 0;
+    bottom: -5px;
 
-  .language-switcher {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+    width: 100%;
+    height: 1px;
 
-  .language-switcher a {
-    color: $color-muted;
-    transition: color $transition-fast;
-  }
+    background: currentColor;
 
-  .language-switcher a:hover {
-    color: $color-text;
-  }
+    transform: scaleX(0);
+    transform-origin: right;
 
-  .language-switcher .active {
-    color: $color-text;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: $color-accent;
-  }
-
-  .contact-link span:last-child {
-    font-size: 1rem;
     transition: transform $transition-fast;
   }
 
-  .contact-link:hover span:last-child {
-    transform: translate(2px, -2px);
+  .desktop-nav a:not(.language-link):hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
-  .menu-toggle {
+  .language-link {
+    margin-left: 8px;
+    color: $color-green;
+  }
+
+  .menu-toggle,
+  .mobile-menu {
     display: none;
-    flex-direction: column;
-    gap: 5px;
-    padding: 4px;
-  }
-
-  .menu-toggle span {
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: $color-text;
   }
 
   @media (max-width: 900px) {
-    .main-nav,
-    .language-switcher,
-    .contact-link {
+    .desktop-nav {
       display: none;
     }
 
     .menu-toggle {
+      display: block;
+
+      padding-top: 4px;
+
+      color: $color-green;
+
+      font-family: $font-mono;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .menu-toggle span {
+      position: relative;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+
       display: flex;
+      align-items: flex-end;
+
+      padding: 120px 24px 32px;
+
+      background: $color-green;
+      color: $color-cream;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity $transition-base,
+        visibility $transition-base;
+    }
+
+    .mobile-menu.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mobile-menu nav a {
+      font-family: $font-display;
+      font-size: clamp(2.5rem, 10vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.025em;
+    }
+
+    .mobile-menu .mobile-language {
+      margin-top: 28px;
+
+      font-family: $font-mono;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .site-header {
+      padding: 20px 0;
+    }
+
+    .header-inner {
+      width: calc(100% - 40px);
+    }
+
+    .brand-name {
+      font-size: 1.75rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.55rem;
     }
   }
 </style>

@@ -1,33 +1,32 @@
 ---
 const isEnglish = Astro.currentLocale === "en";
+
+const content = isEnglish
+  ? {
+      eyebrow: "The starting point",
+      title:
+        "Before building, we need to understand what is worth building.",
+      description:
+        "Every project starts with a need, an idea or something that does not work as it should. The work begins before the code: understanding the context, defining the problem and finding a direction.",
+    }
+  : {
+      eyebrow: "Il punto di partenza",
+      title: "Prima di costruire, bisogna capire cosa vale la pena costruire.",
+      description:
+        "Ogni progetto parte da una necessità, un'idea o qualcosa che non funziona come dovrebbe. Il lavoro comincia prima del codice: capire il contesto, mettere a fuoco il problema e trovare una direzione.",
+    };
 ---
 
 <section class="intro">
   <div class="intro-inner">
-    <div class="section-label">
-      <span>/ 02</span>
-      <span>{isEnglish ? "What we do" : "Cosa facciamo"}</span>
+    <div class="intro-eyebrow">
+      <span>{content.eyebrow}</span>
     </div>
 
     <div class="intro-content">
-      <p class="intro-statement">
-        {
-          isEnglish ? (
-            <>
-              ANANKE is an independent software studio.
-              <br />I design and build digital products that are
-              <span>simple, solid and useful.</span>
-            </>
-          ) : (
-            <>
-              ANANKE è uno studio software indipendente.
-              <br />
-              Progetto e sviluppo prodotti digitali pensati per essere
-              <span>semplici, solidi e utili.</span>
-            </>
-          )
-        }
-      </p>
+      <h2>{content.title}</h2>
+
+      <p>{content.description}</p>
     </div>
   </div>
 </section>
@@ -36,62 +35,140 @@ const isEnglish = Astro.currentLocale === "en";
   @use "../styles/variables" as *;
 
   .intro {
-    padding: 180px $container-padding;
-    border-top: 1px solid $color-border;
+    background: $color-green;
+    color: $color-cream;
+    padding: 140px 0 160px;
   }
 
   .intro-inner {
-    width: 100%;
-    max-width: $container-max-width;
-    margin: 0 auto;
+    width: min(
+      calc(100% - (#{$container-padding} * 2)),
+      $container-max-width
+    );
+
+    margin-inline: auto;
   }
 
-  .section-label {
-    display: flex;
-    align-items: center;
-    gap: 24px;
+  .intro-eyebrow {
+    margin-bottom: 80px;
 
     font-family: $font-mono;
-    font-size: 0.65rem;
-    line-height: 1.2;
+    font-size: 0.68rem;
+    line-height: 1.4;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: $color-muted;
   }
 
   .intro-content {
-    max-width: 1050px;
-    margin-top: 110px;
-    margin-left: auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
   }
 
-  .intro-statement {
+  h2 {
+    grid-column: 1 / span 8;
+
+    max-width: 900px;
+
     margin: 0;
 
     font-family: $font-display;
-    font-size: clamp(2.8rem, 5vw, 5.5rem);
+    font-size: clamp(3.4rem, 5.6vw, 6.1rem);
     font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    color: $color-text;
+    line-height: 0.91;
+    letter-spacing: -0.04em;
   }
 
-  .intro-statement span {
-    color: $color-muted;
-    margin-left: 0.2em;
+  p {
+    grid-column: 8 / span 4;
+
+    align-self: end;
+
+    max-width: 470px;
+
+    margin: 0 0 8px;
+
+    color: rgba(245, 243, 238, 0.72);
+
+    font-size: 1.05rem;
+    line-height: 1.7;
   }
 
-  @media (max-width: 900px) {
+  /* --------------------------------
+     Tablet
+  -------------------------------- */
+
+  @media (max-width: 1000px) {
     .intro {
-      padding: 120px $container-padding;
+      padding: 110px 0 120px;
+    }
+
+    .intro-eyebrow {
+      margin-bottom: 60px;
+    }
+
+    h2 {
+      grid-column: 1 / span 9;
+
+      font-size: clamp(3.25rem, 6vw, 5.5rem);
+    }
+
+    p {
+      grid-column: 7 / span 6;
+    }
+  }
+
+  /* --------------------------------
+     Mobile
+  -------------------------------- */
+
+  @media (max-width: 768px) {
+    .intro {
+      padding: 90px 0 100px;
+    }
+
+    .intro-eyebrow {
+      margin-bottom: 48px;
     }
 
     .intro-content {
-      margin-top: 80px;
+      display: block;
     }
 
-    .intro-statement {
-      font-size: clamp(2.4rem, 9vw, 4rem);
+    h2 {
+      font-size: clamp(3rem, 13vw, 5rem);
+      line-height: 0.92;
+    }
+
+    p {
+      max-width: 480px;
+
+      margin-top: 48px;
+      margin-bottom: 0;
+
+      font-size: 0.95rem;
+    }
+  }
+
+  /* --------------------------------
+     Small mobile
+  -------------------------------- */
+
+  @media (max-width: 480px) {
+    .intro {
+      padding: 72px 0 80px;
+    }
+
+    .intro-eyebrow {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: clamp(2.8rem, 13.5vw, 4.5rem);
+    }
+
+    p {
+      margin-top: 40px;
     }
   }
 </style>

@@ -3,93 +3,85 @@ const isEnglish = Astro.currentLocale === "en";
 
 const content = isEnglish
   ? {
-      label: "Approach",
-      title: "I don't start with technology.",
-      titleAccent: "I start with the problem.",
-      description: [
-        "Every project starts with a need, not with a predefined solution. I take the time to understand what needs to be solved, then I choose the right tools to build something that actually works.",
-        "No unnecessary complexity. No technology for the sake of technology. Just thoughtful digital solutions shaped around the people, processes and goals behind each project.",
-      ],
-      principles: [
+      eyebrow: "The process",
+      title:
+        "There is no solution before there is an understanding of the problem.",
+      steps: [
         {
           number: "01",
           title: "Understand",
           description:
-            "I start by understanding the problem, the context and the people who will use the product.",
+            "We start with the context, the people involved and what actually needs to change.",
         },
         {
           number: "02",
-          title: "Design",
+          title: "Shape",
           description:
-            "I turn requirements into clear, simple and purposeful digital experiences.",
+            "We turn needs, ideas and constraints into a clear direction for the project.",
         },
         {
           number: "03",
           title: "Build",
           description:
-            "I develop reliable solutions using the technologies that best fit the project.",
+            "We choose the right tools and turn the direction into something real, useful and reliable.",
+        },
+        {
+          number: "04",
+          title: "Refine",
+          description:
+            "We test, adjust and simplify until the result works as it should.",
         },
       ],
     }
   : {
-      label: "Approccio",
-      title: "Non parto dalla tecnologia.",
-      titleAccent: "Parto dal problema.",
-      description: [
-        "Ogni progetto nasce da una necessità, non da una soluzione predefinita. Prima cerco di capire cosa deve essere risolto, poi scelgo gli strumenti più adatti per costruire qualcosa che funzioni davvero.",
-        "Niente complessità inutile. Niente tecnologia fine a se stessa. Solo soluzioni digitali progettate intorno alle persone, ai processi e agli obiettivi che ci sono dietro ogni progetto.",
-      ],
-      principles: [
+      eyebrow: "Il processo",
+      title: "Non esiste una soluzione prima di aver capito il problema.",
+      steps: [
         {
           number: "01",
           title: "Capire",
           description:
-            "Parto dal problema, dal contesto e dalle persone che utilizzeranno il prodotto.",
+            "Partiamo dal contesto, dalle persone coinvolte e da ciò che deve realmente cambiare.",
         },
         {
           number: "02",
-          title: "Progettare",
+          title: "Dare forma",
           description:
-            "Trasformo le necessità in esperienze digitali chiare, semplici e funzionali.",
+            "Trasformiamo esigenze, idee e vincoli in una direzione chiara per il progetto.",
         },
         {
           number: "03",
           title: "Costruire",
           description:
-            "Sviluppo soluzioni affidabili scegliendo le tecnologie più adatte al progetto.",
+            "Scegliamo gli strumenti giusti e trasformiamo la direzione in qualcosa di reale, utile e affidabile.",
+        },
+        {
+          number: "04",
+          title: "Affinare",
+          description:
+            "Testiamo, correggiamo e semplifichiamo fino a quando il risultato funziona davvero.",
         },
       ],
     };
 ---
 
-<section class="approach">
-  <div class="approach-inner">
-    <div class="section-label">
-      <span>/ 04</span>
-      <span>{content.label}</span>
+<section class="process">
+  <div class="process-inner">
+    <div class="process-header">
+      <span class="eyebrow">{content.eyebrow}</span>
+
+      <h2>{content.title}</h2>
     </div>
 
-    <div class="approach-content">
-      <h2>
-        {content.title}
-        <br />
-        <span>{content.titleAccent}</span>
-      </h2>
-
-      <div class="approach-description">
-        {content.description.map((paragraph) => <p>{paragraph}</p>)}
-      </div>
-    </div>
-
-    <div class="approach-principles">
+    <div class="process-list">
       {
-        content.principles.map((principle) => (
-          <div class="principle">
-            <span class="principle-number">{principle.number}</span>
+        content.steps.map((step) => (
+          <div class="process-step">
+            <span class="step-number">{step.number}</span>
 
-            <h3>{principle.title}</h3>
+            <h3>{step.title}</h3>
 
-            <p>{principle.description}</p>
+            <p>{step.description}</p>
           </div>
         ))
       }
@@ -100,133 +92,218 @@ const content = isEnglish
 <style lang="scss">
   @use "../styles/variables" as *;
 
-  .approach {
-    padding: 180px $container-padding;
-    border-top: 1px solid $color-border;
+  .process {
+    padding: 140px 0 160px;
+
+    background: $color-green;
+    color: $color-cream;
   }
 
-  .approach-inner {
-    width: 100%;
-    max-width: $container-max-width;
-    margin: 0 auto;
+  .process-inner {
+    width: min(
+      calc(100% - (#{$container-padding} * 2)),
+      $container-max-width
+    );
+
+    margin-inline: auto;
   }
 
-  .section-label {
-    display: flex;
-    align-items: center;
+  /* --------------------------------
+     Header
+  -------------------------------- */
+
+  .process-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     gap: 24px;
 
-    font-family: $font-mono;
-    font-size: 0.65rem;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: $color-muted;
+    margin-bottom: 100px;
   }
 
-  .approach-content {
-    display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    gap: 100px;
+  .eyebrow {
+    grid-column: 1 / span 3;
 
-    margin-top: 100px;
+    color: rgba(245, 243, 238, 0.72);
+
+    font-family: $font-mono;
+    font-size: 0.68rem;
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   h2 {
-    max-width: 900px;
+    grid-column: 4 / span 8;
+
+    max-width: 850px;
+
     margin: 0;
 
+    color: $color-cream;
+
     font-family: $font-display;
-    font-size: clamp(3.5rem, 7vw, 7rem);
+    font-size: clamp(3.5rem, 5.8vw, 6.2rem);
     font-weight: 400;
-    line-height: 0.95;
+    line-height: 0.92;
     letter-spacing: -0.04em;
   }
 
-  h2 span {
-    color: $color-accent;
+  /* --------------------------------
+     Process list
+  -------------------------------- */
+
+  .process-list {
+    border-top: 1px solid rgba(245, 243, 238, 0.25);
   }
 
-  .approach-description {
-    align-self: end;
-    max-width: 420px;
-  }
-
-  .approach-description p {
-    margin: 0;
-
-    font-size: 0.95rem;
-    line-height: 1.7;
-    color: $color-muted;
-  }
-
-  .approach-description p + p {
-    margin-top: 24px;
-  }
-
-  .approach-principles {
+  .process-step {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: 1fr 3fr 5fr;
+    gap: 24px;
 
-    margin-top: 140px;
-    padding-top: 32px;
+    padding: 38px 0 40px;
 
-    border-top: 1px solid $color-border;
+    border-bottom: 1px solid rgba(245, 243, 238, 0.25);
   }
 
-  .principle {
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    column-gap: 24px;
-  }
-
-  .principle-number {
-    grid-row: span 2;
+  .step-number {
+    color: rgba(245, 243, 238, 0.72);
 
     font-family: $font-mono;
-    font-size: 0.65rem;
-    color: $color-muted;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
   }
 
-  .principle h3 {
+  h3 {
     margin: 0;
 
+    color: $color-cream;
+
     font-family: $font-display;
-    font-size: 1.8rem;
+    font-size: clamp(2rem, 3vw, 3.2rem);
     font-weight: 400;
     line-height: 1;
+    letter-spacing: -0.025em;
   }
 
-  .principle p {
-    margin: 16px 0 0;
+  .process-step p {
+    max-width: 480px;
 
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: $color-muted;
+    margin: 2px 0 0;
+
+    color: rgba(245, 243, 238, 0.72);
+
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 
-  @media (max-width: 900px) {
-    .approach {
-      padding: 120px $container-padding;
+  /* --------------------------------
+     Tablet
+  -------------------------------- */
+
+  @media (max-width: 1000px) {
+    .process {
+      padding: 120px 0 140px;
     }
 
-    .approach-content {
-      grid-template-columns: 1fr;
-      gap: 48px;
-
-      margin-top: 80px;
+    .process-header {
+      margin-bottom: 80px;
     }
 
     h2 {
-      font-size: clamp(3rem, 12vw, 5rem);
+      grid-column: 4 / span 9;
+
+      font-size: clamp(3.2rem, 5.8vw, 5.5rem);
     }
 
-    .approach-principles {
-      grid-template-columns: 1fr;
-      gap: 48px;
+    .process-step {
+      grid-template-columns: 1fr 3fr 6fr;
+    }
+  }
 
-      margin-top: 100px;
+  /* --------------------------------
+     Mobile
+  -------------------------------- */
+
+  @media (max-width: 768px) {
+    .process {
+      padding: 90px 0 100px;
+    }
+
+    .process-header {
+      display: block;
+
+      margin-bottom: 64px;
+    }
+
+    .eyebrow {
+      display: block;
+
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: clamp(3rem, 13vw, 5rem);
+      line-height: 0.92;
+    }
+
+    .process-step {
+      grid-template-columns: 40px 1fr;
+
+      gap: 16px;
+
+      padding: 32px 0 34px;
+    }
+
+    .step-number {
+      grid-row: 1 / span 2;
+    }
+
+    h3 {
+      font-size: clamp(2rem, 8vw, 2.7rem);
+    }
+
+    .process-step p {
+      max-width: 440px;
+
+      margin-top: 16px;
+
+      font-size: 0.92rem;
+    }
+  }
+
+  /* --------------------------------
+     Small mobile
+  -------------------------------- */
+
+  @media (max-width: 480px) {
+    .process {
+      padding: 72px 0 80px;
+    }
+
+    .process-header {
+      margin-bottom: 48px;
+    }
+
+    .eyebrow {
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      font-size: clamp(2.8rem, 13.5vw, 4.5rem);
+    }
+
+    .process-step {
+      grid-template-columns: 32px 1fr;
+
+      gap: 12px;
+
+      padding: 28px 0 30px;
+    }
+
+    h3 {
+      font-size: 2rem;
     }
   }
 </style>
